@@ -14,7 +14,11 @@ import Pic3 from "../assets/pic3.jpg";
 import Pic4 from "../assets/pic4.jpg";
 import Pic5 from "../assets/pic5.jpg";
 import Pic6 from "../assets/pic6.jpg";
+
 import ScrollToTopButton from "../components/ScrollToTopButton"; // Import the new component
+
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
 
 const images = [Pic1, Pic2, Pic3, Pic4, Pic5, Pic6];
 
@@ -77,11 +81,11 @@ const Home = () => {
             Some Memories From Our Recent Trip
           </h1>
           <Slider {...sliderSettings}>
-            {images.map((img, index) => (
-              <div key={index} className="px-2 ">
+            {images.map((img) => (
+              <div key={img} className="px-2 ">
                 <img
                   src={img}
-                  alt={`Slide ${index}`}
+                  alt={`Slide ${img}`}
                   className="w-full h-52 object-cover rounded-lg shadow-lg"
                 />
               </div>
