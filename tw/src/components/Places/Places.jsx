@@ -19,6 +19,8 @@ const PlacesData = [
     location: "Pakistan",
     description: "Skardu, nestled in the heart of the Gilgit-Baltistan region, is renowned for its breathtaking landscapes, including towering peaks, serene lakes, and stunning valleys, making it a paradise for adventure enthusiasts and nature lovers.",
     price: 36000,
+    days: 3,
+    month: "June",
   },
   {
     img: Img2,
@@ -27,6 +29,8 @@ const PlacesData = [
     description:
       "Fairy Meadows is a stunningly beautiful alpine meadow located at the base of Nanga Parbat in northern Pakistan, offering breathtaking views and serene landscapes.",
     price: 27000,
+    days: 4,
+    month: "July",
   },
   {
     img: Img3,
@@ -35,6 +39,8 @@ const PlacesData = [
     description:
       "Naran Kaghan is a breathtaking valley in northern Pakistan renowned for its scenic landscapes, lush green meadows, and pristine lakes, offering a serene escape into nature's beauty.",
     price: 16000,
+    days: 5,
+    month: "August",
   },
   {
     img: Img4,
@@ -42,6 +48,8 @@ const PlacesData = [
     location: "Pakistan",
     description: "Hunza is a stunning valley in northern Pakistan renowned for its breathtaking landscapes, towering mountains, and vibrant culture.",
     price: 32000,
+    days: 6,
+    month: "September",
   },
   {
     img: Img5,
@@ -50,6 +58,8 @@ const PlacesData = [
     description:
       "Kumrat is a picturesque valley in Pakistan's Khyber Pakhtunkhwa province, renowned for its lush landscapes, crystal-clear rivers, and stunning mountain views.",
     price: 23000,
+    days: 3,
+    month: "October",
   },
   {
     img: Img6,
@@ -58,6 +68,8 @@ const PlacesData = [
     description:
     "Kashmir, often referred to as Paradise on Earth is a picturesque region in South Asia known for its stunning landscapes, including lush valleys, snow-capped mountains, and serene lakes.",
     price: 15200,
+    days: 4,
+    month: "November",
   },
   {
     img: Img7,
@@ -66,6 +78,8 @@ const PlacesData = [
     description:
     "Bashu Valley is a picturesque region in Pakistan's Balochistan province, renowned for its stunning natural landscapes, lush greenery, and serene environment.",
     price: 20000,
+    days: 5,
+    month: "December",
   },
   {
     img: Img8,
@@ -74,6 +88,8 @@ const PlacesData = [
     description:
     "Neelam Valley, located in the Azad Kashmir region of Pakistan, is renowned for its breathtaking landscapes, lush green meadows, and crystal-clear rivers.",
     price: 13200,
+    days: 6,
+    month: "January",
   },
   {
     img: Img9,
@@ -82,6 +98,8 @@ const PlacesData = [
     description:
     "Sharan Forest is a serene and lush green woodland located in the Kaghan Valley of Pakistan, known for its dense coniferous trees and tranquil natural beauty.",
     price: 15200,
+    days: 3,
+    month: "February",
   },
   {
     img: Img10,
@@ -90,6 +108,8 @@ const PlacesData = [
     description:
     "Naltar Valley, located in the Gilgit-Baltistan region of Pakistan, is renowned for its stunning landscapes, vibrant lakes, and skiing opportunities.",
     price: 15200,
+    days: 4,
+    month: "March",
   },
   
 ];

@@ -1,6 +1,7 @@
 import React from "react";
 import { IoLocationSharp } from "react-icons/io5";
 import { MdOutlineCalendarToday } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 const PlaceCard = ({
   img,
@@ -10,6 +11,7 @@ const PlaceCard = ({
   price,
   days,
   month,
+  id,
   handleOrderPopup,
 }) => {
   return (
@@ -41,9 +43,12 @@ const PlaceCard = ({
         <div className="border-t-2 pt-4">
           <div className="flex items-center justify-between">
             <div className="text-xl font-bold">From Rs: {price}/-</div>
-            <button className="bg-primary text-white px-4 py-2 rounded-md">
+            <Link
+              to={`/place/${id}`} // Link to the detailed page
+              className="bg-primary text-white px-4 py-2 rounded-md"
+            >
               Explore
-            </button>
+            </Link>
           </div>
         </div>
       </div>
