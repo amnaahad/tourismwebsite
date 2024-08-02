@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import PlaceCard from "./PlaceCard";
+import Modal from "../Modal/Modal";
 import { Link } from "react-router-dom";
 import Img1 from "../../assets/places/boat.jpg";
 import Img2 from "../../assets/places/tajmahal.jpg";
@@ -13,6 +14,7 @@ import Img9 from "../../assets/places/sharan.png";
 import Img10 from "../../assets/places/naltar.png";
 
 const PlacesData = [
+  // ... Your existing PlacesData
   {
     img: Img1,
     title: "Skardu",
@@ -112,9 +114,21 @@ const PlacesData = [
     month: "March",
   },
   
+
 ];
 
 const Places = ({ handleOrderPopup, limit, heading }) => {
+  const [selectedPlace, setSelectedPlace] = useState(null);
+
+  const openModal = (id) => {
+    const place = PlacesData.find(p => p.id === id);
+    setSelectedPlace(place);
+  };
+
+  const closeModal = () => {
+    setSelectedPlace(null);
+  };
+
   const displayedPlaces = limit ? PlacesData.slice(0, limit) : PlacesData;
 
   return (
@@ -124,11 +138,11 @@ const Places = ({ handleOrderPopup, limit, heading }) => {
           {heading}
         </h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {displayedPlaces.map((item, index) => (
+          {displayedPlaces.map((item) => (
             <PlaceCard
-              handleOrderPopup={handleOrderPopup}
-              key={index}
+              key={item.id}
               {...item}
+              openModal={openModal}
             />
           ))}
         </div>
@@ -143,8 +157,16 @@ const Places = ({ handleOrderPopup, limit, heading }) => {
           </div>
         )}
       </section>
+      {selectedPlace && (
+        <Modal
+          isOpen={!!selectedPlace}
+          onClose={closeModal}
+          place={selectedPlace}
+        />
+      )}
     </div>
   );
 };
 
 export default Places;
+
