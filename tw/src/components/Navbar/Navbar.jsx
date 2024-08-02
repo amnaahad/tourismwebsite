@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Logo from "../../assets/logo.png";
+import Logo2 from "../../assets/logo2.png"; // Import the second logo
 import { NavLink, Link } from "react-router-dom";
-import { FaCaretDown } from "react-icons/fa";
-import ResponsiveMenu from "./ResponsiveMenu";
 import { HiMenuAlt3, HiMenuAlt1 } from "react-icons/hi";
+import { FaChevronDown } from "react-icons/fa"; // Import the dropdown arrow icon
+import ResponsiveMenu from "./ResponsiveMenu";
 
+// Define Navbar links including the new "More" dropdown
 export const NavbarLinks = [
   {
     name: "Home",
@@ -15,45 +17,44 @@ export const NavbarLinks = [
     link: "/about",
   },
   {
-    name: "Blogs",
-    link: "/blogs",
+    name: "Tour Packages",
+    link: "/tourpackages",
   },
   {
-    name: "Best Places",
-    link: "/best-places",
-  },
-];
-
-const DropdownLinks = [
-  {
-    name: "Our Services",
-    link: "/#services",
+    name: "Services",
+    link: "/services",
   },
   {
-    name: "Top Brands",
-    link: "/#mobile_brands",
-  },
-  {
-    name: "Location",
-    link: "/#location",
+    name: "More",
+    subLinks: [
+      {
+        name: "Blogs",
+        link: "/blogs",
+      },
+      {
+        name: "Contact Us",
+        link: "/contactus",
+      },
+    ],
   },
 ];
 
 const Navbar = ({ handleOrderPopup }) => {
   const [showMenu, setShowMenu] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [showMoreDropdown, setShowMoreDropdown] = useState(false);
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
   };
 
+  const toggleMoreDropdown = () => {
+    setShowMoreDropdown(!showMoreDropdown);
+  };
+
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      setIsScrolled(window.scrollY > 50);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -62,75 +63,115 @@ const Navbar = ({ handleOrderPopup }) => {
     };
   }, []);
 
+  const handleLinkClick = () => {
+    setShowMenu(false);
+    setShowMoreDropdown(false);
+    window.scrollTo(0, 0); // Scroll to top when a link is clicked
+  };
+
   return (
     <>
-      <nav className={`fixed top-0 right-0 w-full z-50 transition-all duration-300 ${isScrolled ? "bg-white text-black shadow-md" : "bg-transparent text-white"}`}>
-      
+      <nav
+        className={`fixed top-0 right-0 w-full z-50 transition-all duration-300 ${
+          isScrolled
+            ? "bg-white text-black shadow-md"
+            : "bg-transparent text-white shadow-lg backdrop-filter backdrop-blur-lg"
+        }`}
+        style={{
+          boxShadow: isScrolled
+            ? "0 8px 12px rgba(0, 0, 0, 0.2)"
+            : "0 8px 12px rgba(0, 0, 0, 0.5)",
+        }}
+      >
         <div className="container py-3 sm:py-0">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-4 font-bold text-2xl">
-              <Link to={"/"} onClick={() => window.scrollTo(0, 0)}>
-                <img src={Logo} alt="" className="h-16" />
+              <Link to="/" onClick={handleLinkClick}>
+                <img
+                  src={isScrolled ? Logo : Logo2}
+                  alt="Logo"
+                  className={`transition-all duration-300 ${
+                    isScrolled ? "h-16" : "h-24"
+                  }`}
+                />
               </Link>
             </div>
             <div className="hidden md:block">
               <ul className="flex items-center gap-6">
                 {NavbarLinks.map((link) => (
-                  <li className="py-4" key={link.name}>
-                    <NavLink
-                      to={link.link}
-                      className={({ isActive }) =>
-                        isActive
-                          ? "text-lg underline"
-                          : "text-base"
-                      }
-                      end
-                    >
-                      {link.name}
-                    </NavLink>
-                  </li>
+                  link.subLinks ? (
+                    <li className="relative py-4" key={link.name}>
+                      <button
+                        onClick={toggleMoreDropdown}
+                        className="flex items-center gap-1 text-base"
+                      >
+                        {link.name}
+                        <FaChevronDown
+                          className={`transition-transform duration-300 ${showMoreDropdown ? "rotate-180" : ""}`}
+                        />
+                      </button>
+                      {showMoreDropdown && (
+                        <ul className="absolute top-full left-0 mt-2 w-48 bg-white text-black shadow-lg rounded">
+                          {link.subLinks.map((subLink) => (
+                            <li key={subLink.name} className="py-2 px-4 hover:bg-gray-200">
+                              <NavLink
+                                to={subLink.link}
+                                className={({ isActive }) =>
+                                  isActive ? "text-lg underline" : "text-base"
+                                }
+                                end
+                                onClick={handleLinkClick}
+                              >
+                                {subLink.name}
+                              </NavLink>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </li>
+                  ) : (
+                    <li className="py-4" key={link.name}>
+                      <NavLink
+                        to={link.link}
+                        className={({ isActive }) =>
+                          isActive ? "text-lg underline" : "text-base"
+                        }
+                        end
+                        onClick={handleLinkClick}
+                      >
+                        {link.name}
+                      </NavLink>
+                    </li>
+                  )
                 ))}
-                <li className="group relative cursor-pointer">
-                  <a href="/#home" className="flex h-[72px] items-center gap-[2px]">
-                    Quick Links{" "}
-                    <span>
-                      <FaCaretDown className="transition-all duration-200 group-hover:rotate-180" />
-                    </span>
-                  </a>
-                  <div className={`absolute -left-9 z-[9999] hidden w-[150px] rounded-md ${isScrolled ? "bg-white text-black" : "bg-transparent text-white"} p-2 group-hover:block shadow-md`}>
-                    <ul className="space-y-3">
-                      {DropdownLinks.map((data) => (
-                        <li key={data.name}>
-                          <a className="inline-block w-full rounded-md p-2 hover:bg-primary/20" href={data.link}>
-                            {data.name}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </li>
               </ul>
             </div>
             <div className="flex items-center gap-4">
               <button
                 className="bg-gradient-to-br from-primary to-secondary hover:from-secondary hover:to-primary transition-all duration-600 text-white px-3 py-1 rounded-full"
-                onClick={() => {
-                  handleOrderPopup();
-                }}
+                onClick={handleOrderPopup}
               >
                 Book Now
               </button>
               <div className="md:hidden block">
                 {showMenu ? (
-                  <HiMenuAlt1 onClick={toggleMenu} className="cursor-pointer transition-all" size={30} />
+                  <HiMenuAlt1
+                    onClick={toggleMenu}
+                    className="cursor-pointer transition-all"
+                    size={30}
+                  />
                 ) : (
-                  <HiMenuAlt3 onClick={toggleMenu} className="cursor-pointer transition-all" size={30} />
+                  <HiMenuAlt3
+                    onClick={toggleMenu}
+                    className="cursor-pointer transition-all"
+                    size={30}
+                  />
                 )}
               </div>
             </div>
           </div>
         </div>
-        <ResponsiveMenu setShowMenu={setShowMenu} showMenu={showMenu} />
+        {showMenu && <ResponsiveMenu setShowMenu={setShowMenu} showMenu={showMenu} />}
       </nav>
     </>
   );

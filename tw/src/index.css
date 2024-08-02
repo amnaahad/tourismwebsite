@@ -7,3 +7,7 @@
     @apply text-primary;
   }
 }
+/* index.css or Home.css */
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
+

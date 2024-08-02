@@ -14,7 +14,7 @@ const zoomOut = keyframes`
 const HeroContainer = styled.div`
   position: relative;
   width: 100%;
-  height: 600px; /* Adjust the height as needed */
+  height: 500px; /* Adjust the height as needed */
   overflow: hidden; /* Hide overflow to prevent zoomed image from spilling */
 `;
 
