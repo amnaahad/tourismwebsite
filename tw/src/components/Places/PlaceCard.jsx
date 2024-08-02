@@ -1,7 +1,6 @@
 import React from 'react';
 import { IoLocationSharp } from 'react-icons/io5';
 import { MdOutlineCalendarToday } from 'react-icons/md';
-import { Link } from 'react-router-dom';
 
 const PlaceCard = ({
   img,
@@ -12,8 +11,7 @@ const PlaceCard = ({
   days,
   month,
   id,
-  handleOrderPopup,
-  openModal
+  onExplore,
 }) => {
   return (
     <div className="rounded-lg overflow-hidden shadow-lg transition-all duration-500 hover:shadow-xl cursor-pointer transform hover:-translate-y-2">
@@ -42,7 +40,7 @@ const PlaceCard = ({
           <div className="flex items-center justify-between">
             <div className="text-xl font-bold">From Rs: {price}/-</div>
             <button
-              onClick={() => openModal(id)}
+              onClick={onExplore}
               className="bg-primary text-white px-4 py-2 rounded-md"
             >
               Explore

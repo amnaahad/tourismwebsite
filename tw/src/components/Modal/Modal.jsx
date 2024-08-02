@@ -16,7 +16,7 @@ const Modal = ({ isOpen, onClose, place }) => {
           <IoClose />
         </button>
         <div className="flex flex-col lg:flex-row">
-          <div className="w-full lg:w-1/3 h-80 lg:h-auto overflow-hidden flex items-center justify-center mt-6 lg:mt-0">
+          <div className="w-full lg:w-1/3 h-80 lg:h-auto overflow-hidden flex items-center justify-center lg:mr-6 mt-6 lg:mt-0">
             <img
               src={place.img}
               alt={place.title}
