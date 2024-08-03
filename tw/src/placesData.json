@@ -62,7 +62,7 @@
       },
       {
         "id": 7,
-        "img": "/src/assets/places/bashu.png",
+        "img": "/src/assets/places/bashu.jpg",
         "title": "Bashu",
         "location": "Pakistan",
         "description": "Bashu Valley is a picturesque region in Pakistan's Balochistan province, renowned for its stunning natural landscapes, lush greenery, and serene environment.",
@@ -72,7 +72,7 @@
       },
       {
         "id": 8,
-        "img": "/src/assets/places/neelam.png",
+        "img": "/src/assets/places/neelam.jpg",
         "title": "Neelam Valley",
         "location": "Pakistan",
         "description": "Neelam Valley, located in the Azad Kashmir region of Pakistan, is renowned for its breathtaking landscapes, lush green meadows, and crystal-clear rivers.",
@@ -82,7 +82,7 @@
       },
       {
         "id": 9,
-        "img": "/src/assets/places/sharan.png",
+        "img": "/src/assets/places/sharan.jpg",
         "title": "Sharan Forest",
         "location": "Pakistan",
         "description": "Sharan Forest is a serene and lush green woodland located in the Kaghan Valley of Pakistan, known for its dense coniferous trees and tranquil natural beauty.",
@@ -92,7 +92,7 @@
       },
       {
         "id": 10,
-        "img": "/src/assets/places/naltar.png",
+        "img": "/src/assets/places/naltar.jpg",
         "title": "Naltar Valley",
         "location": "Pakistan",
         "description": "Naltar Valley, located in the Gilgit-Baltistan region of Pakistan, is renowned for its stunning landscapes, vibrant lakes, and skiing opportunities.",
