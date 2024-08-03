@@ -96,7 +96,7 @@ const Home = () => {
         <BlogsComp />
         <Testimonial />
         <OrderPopup orderPopup={orderPopup} setOrderPopup={setOrderPopup} />
-        <ScrollToTopButton /> {/* Add the ScrollToTopButton component */}
+        <ScrollToTopButton /> 
       </div>
     </>
   );
