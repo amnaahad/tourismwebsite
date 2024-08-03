@@ -7,31 +7,29 @@ const About = () => {
   return (
     <>
       <Hero2 pageName="About Us" />
-      <div className="container pt-14">
+      <div className="container pt-8"> {/* Adjusted padding top */}
         <div className="py-10">
           <h1 className=" my-8 border-l-8 border-primary/50 py-2 pl-2 text-3xl font-bold">
             About us
           </h1>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia
-            ducimus cupiditate quo harum officia perspiciatis hic ut sunt
-            repudiandae, laboriosam expedita nostrum tempora, consectetur
-            itaque, voluptate error aperiam corrupti ullam aspernatur a!
-            Dolorem, reprehenderit amet quidem deleniti iure rem vel a enim
-            ipsam hic numquam consequatur eius id eaque accusamus repudiandae
-            impedit, quisquam non, harum inventore ratione? Tempora voluptatum
-            ut eligendi corrupti esse, repellat nesciunt illum facilis officiis?
-            Nisi quidem officiis asperiores nostrum ipsa maiores explicabo quia!
-            Corporis provident asperiores fuga eligendi rem temporibus possimus
-            autem excepturi! Facilis sunt corrupti nesciunt asperiores, ab
-            consectetur doloremque, velit a mollitia possimus quaerat!
+            Safar.com (Pvt) Ltd. is a registered & licenced platform for families, students and dynamic nature explorers to fulfil their need for adventure. For everyone out there, from the hard core adrenaline junkie to the average Joe wanting a simple escape from the mundaneness of everyday life.Our vision is to turn your travel dreams into reality. With passion and expertise we are here to help you to make your tour memorable.Empowering your travel dreams into epic adventure. We are your partner in making your journey unforgettable memories.
           </p>
           <br />
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi
-            suscipit minus similique aliquam recusandae quisquam id nulla
-            tempora voluptate vero.
+            Explore the beauties of nature of Pakistan with us. Join in domestic tours of northern areas and make memorable memories.
           </p>
+        </div>
+      </div>
+      <div className="container pt-2"> {/* Adjusted padding top */}
+        <div className="py-10">
+          <h1 className=" my-1 border-l-8 border-primary/50 py-2 pl-2 text-3xl font-bold">
+            Why Choose Us
+          </h1>
+          <p>
+            At Safar.com, we are dedicated to delivering unparalleled travel experiences with our deep local knowledge, personalized service, and commitment to quality. Our expert guides ensure that you explore hidden gems and iconic landmarks, while our tailor-made itineraries cater to your unique preferences and needs. With a focus on safety, comfort, and authentic cultural encounters, we strive to turn every journey into a memorable adventure. Choose us for an extraordinary travel experience where every detail is meticulously crafted for your enjoyment.
+          </p>
+          <br />
         </div>
       </div>
       <Location />

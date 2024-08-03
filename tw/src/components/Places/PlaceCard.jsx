@@ -1,5 +1,6 @@
-import React from "react";
-import { IoLocationSharp } from "react-icons/io5";
+import React from 'react';
+import { IoLocationSharp } from 'react-icons/io5';
+import { MdOutlineCalendarToday } from 'react-icons/md';
 
 const PlaceCard = ({
   img,
@@ -7,41 +8,47 @@ const PlaceCard = ({
   location,
   description,
   price,
-  type,
-  handleOrderPopup,
+  days,
+  month,
+  id,
+  onExplore,
 }) => {
   return (
-    <>
-      <div
-        className="shadow-lg transition-all duration-500 hover:shadow-xl dark:bg-slate-950 dark:text-white cursor-pointer"
-        onClick={handleOrderPopup}
-      >
-        <div className="overflow-hidden">
-          <img
-            src={img}
-            alt="No image"
-            className="mx-auto h-[220px] w-full object-cover transition duration-700 hover:skew-x-2 hover:scale-110"
-          />
-        </div>
-
-        <div className="space-y-2 p-3">
-          <h1 className="line-clamp-1 font-bold text-xl">{title}</h1>
-          <div className="flex items-center gap-2 opacity-70">
-            <IoLocationSharp />
-            <span>{location}</span>
+    <div className="rounded-lg overflow-hidden shadow-lg transition-all duration-500 hover:shadow-xl cursor-pointer transform hover:-translate-y-2">
+      <img
+        src={img}
+        alt={title}
+        className="h-48 w-full object-cover"
+      />
+      <div className="p-4">
+        <div className="flex items-center justify-between mb-2">
+          <div className="flex items-center text-gray-600 text-sm">
+            <MdOutlineCalendarToday className="mr-1" />
+            <span>{days} Days</span>
           </div>
-          <p className="line-clamp-2">{description}</p>
-          <div className="flex items-center justify-between border-t-2 py-3 !mt-3">
-            <div className="opacity-70">
-              <p>{type}</p>
-            </div>
-            <div>
-              <p className="text-2xl font-bold">${price}</p>
-            </div>
+          <div className="flex items-center text-gray-600 text-sm">
+            <MdOutlineCalendarToday className="mr-1" />
+            <span>{month}</span>
+          </div>
+        </div>
+        <h1 className="text-xl font-bold mb-2">{title}</h1>
+        <div className="flex items-center text-gray-600 text-sm mb-4">
+          <IoLocationSharp className="mr-1" />
+          <span>{location}</span>
+        </div>
+        <div className="border-t-2 pt-4">
+          <div className="flex items-center justify-between">
+            <div className="text-xl font-bold">From Rs: {price}/-</div>
+            <button
+              onClick={onExplore}
+              className="bg-primary text-white px-4 py-2 rounded-md"
+            >
+              Explore
+            </button>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
