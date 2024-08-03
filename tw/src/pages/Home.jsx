@@ -14,7 +14,6 @@ import Pic3 from "../assets/pic3.jpg";
 import Pic4 from "../assets/pic4.jpg";
 import Pic5 from "../assets/pic5.jpg";
 import Pic6 from "../assets/pic6.jpg";
-
 import ScrollToTopButton from "../components/ScrollToTopButton"; // Import the new component
 
 import "slick-carousel/slick/slick.css"; 
