@@ -1,15 +1,53 @@
-import React from "react";
+import React, { useState } from "react";
+import { TypeAnimation } from 'react-type-animation';
+import placesData from '../../placesData.json'; // Ensure the correct path to JSON
+import Modal from "../Modal/Modal";// Ensure the correct path to Modal component
 
 const Hero = () => {
-  const [priceValue, setPriceValue] = React.useState(30);
+  const [priceValue, setPriceValue] = useState(30000);
+  const [destination, setDestination] = useState("");
+  const [modalData, setModalData] = useState(null);
+
+  const handleSearch = () => {
+    if (!destination) {
+      alert("Please enter a destination.");
+      return;
+    }
+
+    const inputTitle = destination.trim().toLowerCase(); // Trim input and convert to lowercase
+
+    // Find a place that matches the title
+    const matchingData = placesData.places.find(place => {
+      const placeTitle = place.title.toLowerCase(); // Convert place title to lowercase
+      return placeTitle === inputTitle;
+    });
+
+    console.log("Searching for:", destination);
+    console.log("Matching data:", matchingData);
+
+    if (matchingData) {
+      setModalData(matchingData);
+    } else {
+      alert("No matching results found.");
+    }
+  };
 
   return (
-    <div className=" bg-black/20 h-full">
+    <div className="bg-black/20 h-full">
       <div className="h-full flex justify-center items-center p-4 bg-primary/10">
         <div className="container grid grid-cols-1 gap-4">
-        <h1 className="text-6xl font-bold text-white text-center mt-4">It's time for new Adventures</h1> 
+          <TypeAnimation
+            sequence={[
+              "It's time for new Adventures", // Types this string
+              1000, // Waits 1s
+              '', // Deletes the text
+            ]}
+            wrapper="h1"
+            cursor={true}
+            repeat={Infinity}
+            style={{ fontSize: '3em', fontWeight: 'bold', color: 'white', textAlign: 'center', marginTop: '1rem' }}
+          />
           <div className="text-white mt-5">
-          
             <p
               data-aos="fade-up"
               data-aos-delay="300"
@@ -26,39 +64,41 @@ const Hero = () => {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 py-3">
               <div>
                 <label htmlFor="destination" className="opacity-70">
-                  Searh your Destination
+                  Search your Destination
                 </label>
                 <input
                   type="text"
                   name="destination"
                   id="destination"
                   placeholder="Kumrat"
+                  value={destination}
+                  onChange={(e) => setDestination(e.target.value)}
                   className="w-full bg-gray-100 my-2 range accent-primary focus:outline-primary focus:outline outline-1 rounded-full p-2"
                 />
               </div>
               <div>
-                <label htmlFor="destination" className="opacity-70">
-                  Date
+                <label htmlFor="date" className="opacity-70">
+                  Date (Optional)
                 </label>
                 <input
                   type="date"
-                  name="destination"
-                  id="destination"
+                  name="date"
+                  id="date"
                   className="w-full !placeholder-slate-400 bg-gray-100 my-2 rounded-full focus:outline-primary focus:outline outline-1 p-2"
                 />
               </div>
               <div>
-                <label htmlFor="destination" className="opacity-70 block">
+                <label htmlFor="price" className="opacity-70 block">
                   <div className="w-full flex justify-between items-center">
                     <p>Max Price</p>
-                    <p className="font-bold text-xl">PKR  {priceValue}</p>
+                    <p className="font-bold text-xl">PKR {priceValue}</p>
                   </div>
                 </label>
                 <div className=" bg-gray-100 rounded-full p-2 flex items-center justify-center ">
                   <input
                     type="range"
-                    name="destination"
-                    id="destination"
+                    name="price"
+                    id="price"
                     className="appearance-none w-full bg-gradient-to-r from-primary to-secondary h-2 rounded-full my-2"
                     min="10000"
                     max="80000"
@@ -69,8 +109,10 @@ const Hero = () => {
                 </div>
               </div>
             </div>
-            <button className="bg-gradient-to-br from-primary to-secondary hover:from-secondary hover:to-primary transition-all duration-600 text-white px-3 py-1 rounded-full duration-200 absolute -bottom-5 left-1/2 -translate-x-1/2">
-        
+            <button
+              onClick={handleSearch}
+              className="bg-gradient-to-br from-primary to-secondary hover:from-secondary hover:to-primary transition-all duration-600 text-white px-3 py-1 rounded-full duration-200 absolute -bottom-5 left-1/2 -translate-x-1/2"
+            >
               Search Now
             </button>
           </div>
@@ -94,6 +136,8 @@ const Hero = () => {
           </div>
         </div>
       </div>
+      {/* Conditionally render modal if modalData is set */}
+      <Modal isOpen={!!modalData} onClose={() => setModalData(null)} place={modalData} />
     </div>
   );
 };

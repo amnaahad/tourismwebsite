@@ -2,6 +2,7 @@ import React from 'react';
 import { IoLocationSharp } from 'react-icons/io5';
 import { MdOutlineCalendarToday } from 'react-icons/md';
 
+
 const PlaceCard = ({
   img,
   title,
