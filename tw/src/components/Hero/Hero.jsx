@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { TypeAnimation } from 'react-type-animation';
 import placesData from '../../placesData.json'; // Ensure the correct path to JSON
-import Modal from "../Modal/Modal";// Ensure the correct path to Modal component
+import Modal from "../Modal/Modal"; // Ensure the correct path to Modal component
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Hero = () => {
   const [priceValue, setPriceValue] = useState(30000);
@@ -10,7 +12,7 @@ const Hero = () => {
 
   const handleSearch = () => {
     if (!destination) {
-      alert("Please enter a destination.");
+      toast.error("Please enter a destination.");
       return;
     }
 
@@ -27,8 +29,9 @@ const Hero = () => {
 
     if (matchingData) {
       setModalData(matchingData);
+      toast.success("Destination found!");
     } else {
-      alert("No matching results found.");
+      toast.error("No matching results found.");
     }
   };
 
@@ -138,6 +141,7 @@ const Hero = () => {
       </div>
       {/* Conditionally render modal if modalData is set */}
       <Modal isOpen={!!modalData} onClose={() => setModalData(null)} place={modalData} />
+      <ToastContainer />
     </div>
   );
 };
