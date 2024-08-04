@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const BlogCard = ({ image, date, title, description, author }) => {
+const BlogCard = ({ image, date, title, description }) => {
   return (
     <>
       <Link
@@ -14,7 +14,7 @@ const BlogCard = ({ image, date, title, description, author }) => {
           //   behavior: "smooth",
           // });
         }}
-        state={{ image, date, title, description, author }}
+        state={{ image, date, title, description}}
       >
         <div className="p-4 shadow-lg transition-all duration-500 hover:shadow-xl dark:bg-slate-950 dark:text-white">
           <div className="overflow-hidden">
@@ -26,7 +26,7 @@ const BlogCard = ({ image, date, title, description, author }) => {
           </div>
           <div className="flex justify-between pt-2 text-slate-600">
             <p>{date}</p>
-            <p className="line-clamp-1">By {author}</p>
+         
           </div>
           <div className="space-y-2 py-3">
             <h1 className="line-clamp-1 font-bold">{title}</h1>
