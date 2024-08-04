@@ -1,8 +1,21 @@
 import React from 'react';
 import Hero2 from '../components/Hero/Hero2'; // Assuming Hero2 is your hero section component
 import { FaMapMarkerAlt, FaPhone, FaEnvelope } from 'react-icons/fa'; // Icons for contact details
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ContactUs = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault(); // Prevents the default form submission behavior
+
+    // Here, you can handle form submission (e.g., send data to an API)
+    // For now, we'll just show a success toast message
+    toast.success("Message sent successfully!");
+
+    // You can also clear the form or perform other actions here if needed
+    e.target.reset(); // Resets the form fields
+  };
+
   return (
     <>
       <Hero2 pageName={"Contact Us"} />
@@ -13,7 +26,7 @@ const ContactUs = () => {
             {/* Contact Form */}
             <div className="md:w-1/2 bg-white p-8 rounded-lg shadow-lg">
               <h2 className="text-2xl font-bold mb-6">Get in Touch</h2>
-              <form>
+              <form onSubmit={handleSubmit}>
                 <div className="mb-4">
                   <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
                   <input
@@ -21,7 +34,7 @@ const ContactUs = () => {
                     id="name"
                     name="name"
                     className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-primary focus:border-primary sm:text-sm"
-                    placeholder="John Doe"
+                    placeholder="Enter Your Name"
                     required
                   />
                 </div>
@@ -32,7 +45,7 @@ const ContactUs = () => {
                     id="email"
                     name="email"
                     className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-primary focus:border-primary sm:text-sm"
-                    placeholder="johndoe@example.com"
+                    placeholder="email@example.com"
                     required
                   />
                 </div>
@@ -61,15 +74,15 @@ const ContactUs = () => {
               <h2 className="text-2xl font-bold mb-6">Contact Information</h2>
               <div className="flex items-center mb-4">
                 <FaMapMarkerAlt className="text-primary mr-3" size={20} />
-                <p className="text-lg">1234 Street Name, City, Country</p>
+                <p className="text-lg">Street 14, Sector I-8, Islamabad, Pakistan</p>
               </div>
               <div className="flex items-center mb-4">
                 <FaPhone className="text-primary mr-3" size={20} />
-                <p className="text-lg">+123 456 7890</p>
+                <p className="text-lg">+92 345 6789095</p>
               </div>
               <div className="flex items-center mb-4">
                 <FaEnvelope className="text-primary mr-3" size={20} />
-                <p className="text-lg">contact@example.com</p>
+                <p className="text-lg">safardotcom@gmail.com</p>
               </div>
             </div>
           </div>
@@ -90,6 +103,8 @@ const ContactUs = () => {
           </div>
         </div>
       </section>
+
+      <ToastContainer />
     </>
   );
 };
