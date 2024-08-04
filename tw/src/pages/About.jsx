@@ -1,35 +1,121 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Hero2 from "../components/Hero/Hero2"; 
 import BlogsComp from "../components/Blogs/BlogsComp";
 import Location from "../components/Location/Location";
+import { FaGlobe, FaHeart, FaChalkboardTeacher, FaMap } from "react-icons/fa";
 
 const About = () => {
+  // State to handle visibility of sections
+  const [inView, setInView] = useState({ about: false, whyChoose: false });
+
+  // Refs for intersection observer
+  const aboutRef = useRef(null);
+  const whyChooseRef = useRef(null);
+
+  useEffect(() => {
+    const observerOptions = {
+      root: null,
+      rootMargin: '4px',
+      threshold: 0.2,
+    };
+
+    const handleIntersection = (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          setInView(prev => ({ ...prev, [entry.target.dataset.section]: true }));
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(handleIntersection, observerOptions);
+    if (aboutRef.current) observer.observe(aboutRef.current);
+    if (whyChooseRef.current) observer.observe(whyChooseRef.current);
+
+    return () => {
+      if (aboutRef.current) observer.unobserve(aboutRef.current);
+      if (whyChooseRef.current) observer.unobserve(whyChooseRef.current);
+    };
+  }, []);
+
   return (
     <>
       <Hero2 pageName="About Us" />
       <div className="container pt-8"> {/* Adjusted padding top */}
-        <div className="py-10">
-          <h1 className=" my-8 border-l-8 border-primary/50 py-2 pl-2 text-3xl font-bold">
-            About us
+        <div
+          ref={aboutRef}
+          data-section="about"
+          className={`py-10 transition-transform duration-1000 ease-in-out ${inView.about ? 'transform translate-y-0 opacity-100' : 'transform translate-y-10 opacity-0'}`}
+        >
+          <h1 className="my-8 border-l-8 border-primary/50 py-2 pl-2 text-3xl font-bold">
+            About Us
           </h1>
-          <p>
-            Safar.com (Pvt) Ltd. is a registered & licenced platform for families, students and dynamic nature explorers to fulfil their need for adventure. For everyone out there, from the hard core adrenaline junkie to the average Joe wanting a simple escape from the mundaneness of everyday life.Our vision is to turn your travel dreams into reality. With passion and expertise we are here to help you to make your tour memorable.Empowering your travel dreams into epic adventure. We are your partner in making your journey unforgettable memories.
-          </p>
-          <br />
-          <p>
-            Explore the beauties of nature of Pakistan with us. Join in domestic tours of northern areas and make memorable memories.
-          </p>
-        </div>
-      </div>
-      <div className="container pt-2"> {/* Adjusted padding top */}
-        <div className="py-10">
-          <h1 className=" my-1 border-l-8 border-primary/50 py-2 pl-2 text-3xl font-bold">
-            Why Choose Us
-          </h1>
-          <p>
-            At Safar.com, we are dedicated to delivering unparalleled travel experiences with our deep local knowledge, personalized service, and commitment to quality. Our expert guides ensure that you explore hidden gems and iconic landmarks, while our tailor-made itineraries cater to your unique preferences and needs. With a focus on safety, comfort, and authentic cultural encounters, we strive to turn every journey into a memorable adventure. Choose us for an extraordinary travel experience where every detail is meticulously crafted for your enjoyment.
-          </p>
-          <br />
+          <div className="flex flex-col md:flex-row gap-6">
+            <div className="flex-1 bg-white text-black rounded-lg shadow-lg p-6 transition-all duration-500 hover:bg-gradient-to-r hover:from-primary hover:to-secondary"> {/* Hover gradient effect */}
+              <h2 className="text-2xl font-bold mb-4">
+                Our Mission
+              </h2>
+              <p>
+                Safar.com (Pvt) Ltd. is dedicated to providing an unparalleled adventure experience for families, students, and nature enthusiasts. Our mission is to transform travel dreams into unforgettable realities through passion, expertise, and attention to detail.
+              </p>
+            </div>
+            <div className="flex-1 bg-white text-black rounded-lg shadow-lg p-6 transition-all duration-500 hover:bg-gradient-to-r hover:from-primary hover:to-secondary"> {/* Hover gradient effect */}
+              <h2 className="text-2xl font-bold mb-4">
+                Our Vision
+              </h2>
+              <p>
+                We envision a world where every journey is an epic adventure. From adrenaline junkies to those seeking a peaceful escape, we aim to offer experiences that cater to all, making every trip memorable and impactful.
+              </p>
+            </div>
+          </div>
+          <div className="my-10">
+            <h2 className="text-2xl font-bold mb-4">Our Values</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+              <div className="flex items-center bg-white text-black shadow-lg rounded-lg p-6 transition-all duration-500 hover:bg-gradient-to-r hover:from-primary hover:to-secondary"> {/* Hover gradient effect */}
+                <div className="text-4xl text-primary mr-4">
+                  <FaGlobe />
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold">Global Perspective</h3>
+                  <p className="text-gray-600">
+                    We embrace a global perspective, ensuring diverse and inclusive travel experiences.
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-center bg-white text-black shadow-lg rounded-lg p-6 transition-all duration-500 hover:bg-gradient-to-r hover:from-primary hover:to-secondary"> {/* Hover gradient effect */}
+                <div className="text-4xl text-primary mr-4">
+                  <FaHeart />
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold">Passionate Service</h3>
+                  <p className="text-gray-600">
+                    Our passionate team is dedicated to delivering exceptional service and unforgettable experiences.
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-center bg-white text-black shadow-lg rounded-lg p-6 transition-all duration-500 hover:bg-gradient-to-r hover:from-primary hover:to-secondary"> {/* Hover gradient effect */}
+                <div className="text-4xl text-primary mr-4">
+                  <FaChalkboardTeacher />
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold">Expert Guides</h3>
+                  <p className="text-gray-600">
+                    Our expert guides are committed to sharing local insights and ensuring a memorable journey.
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-center bg-white text-black shadow-lg rounded-lg p-6 transition-all duration-500 hover:bg-gradient-to-r hover:from-primary hover:to-secondary"> {/* Hover gradient effect */}
+                <div className="text-4xl text-primary mr-4">
+                  <FaMap />
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold">Local Expertise</h3>
+                  <p className="text-gray-600">
+                    Our deep local knowledge ensures you experience the best of each destination.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <Location />
