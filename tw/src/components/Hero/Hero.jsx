@@ -2,37 +2,34 @@ import React, { useState } from "react";
 import { TypeAnimation } from 'react-type-animation';
 import placesData from '../../placesData.json'; // Ensure the correct path to JSON
 import Modal from "../Modal/Modal"; // Ensure the correct path to Modal component
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 const Hero = () => {
   const [priceValue, setPriceValue] = useState(30000);
   const [destination, setDestination] = useState("");
   const [modalData, setModalData] = useState(null);
+  const [errors, setErrors] = useState({ destination: "" });
 
   const handleSearch = () => {
+    let newErrors = { destination: "" };
+
     if (!destination) {
-      toast.error("Please enter a destination.");
-      return;
-    }
-
-    const inputTitle = destination.trim().toLowerCase(); // Trim input and convert to lowercase
-
-    // Find a place that matches the title
-    const matchingData = placesData.places.find(place => {
-      const placeTitle = place.title.toLowerCase(); // Convert place title to lowercase
-      return placeTitle === inputTitle;
-    });
-
-    console.log("Searching for:", destination);
-    console.log("Matching data:", matchingData);
-
-    if (matchingData) {
-      setModalData(matchingData);
-      toast.success("Destination found!");
+      newErrors.destination = "Please enter a destination.";
     } else {
-      toast.error("No matching results found.");
+      const inputTitle = destination.trim().toLowerCase();
+      const matchingData = placesData.places.find(place => {
+        const placeTitle = place.title.toLowerCase();
+        return placeTitle === inputTitle;
+      });
+
+      if (!matchingData) {
+        newErrors.destination = "No matching results found.";
+      } else {
+        setModalData(matchingData);
+        newErrors.destination = ""; // Clear any existing error if match is found
+      }
     }
+
+    setErrors(newErrors);
   };
 
   return (
@@ -41,9 +38,9 @@ const Hero = () => {
         <div className="container grid grid-cols-1 gap-4">
           <TypeAnimation
             sequence={[
-              "It's time for new Adventures", // Types this string
-              1000, // Waits 1s
-              '', // Deletes the text
+              "It's time for new Adventures",
+              1000,
+              '',
             ]}
             wrapper="h1"
             cursor={true}
@@ -78,6 +75,9 @@ const Hero = () => {
                   onChange={(e) => setDestination(e.target.value)}
                   className="w-full bg-gray-100 my-2 range accent-primary focus:outline-primary focus:outline outline-1 rounded-full p-2"
                 />
+                {errors.destination && (
+                  <p className="text-red-500 text-sm">{errors.destination}</p>
+                )}
               </div>
               <div>
                 <label htmlFor="date" className="opacity-70">
@@ -97,7 +97,7 @@ const Hero = () => {
                     <p className="font-bold text-xl">PKR {priceValue}</p>
                   </div>
                 </label>
-                <div className=" bg-gray-100 rounded-full p-2 flex items-center justify-center ">
+                <div className="bg-gray-100 rounded-full p-2 flex items-center justify-center">
                   <input
                     type="range"
                     name="price"
@@ -141,7 +141,6 @@ const Hero = () => {
       </div>
       {/* Conditionally render modal if modalData is set */}
       <Modal isOpen={!!modalData} onClose={() => setModalData(null)} place={modalData} />
-      <ToastContainer />
     </div>
   );
 };
