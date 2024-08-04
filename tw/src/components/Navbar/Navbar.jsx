@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Logo from "../../assets/logo.png";
 import Logo2 from "../../assets/logo2.png"; // Import the second logo
 import { NavLink, Link } from "react-router-dom";
@@ -43,6 +43,7 @@ const Navbar = ({ handleOrderPopup }) => {
   const [showMenu, setShowMenu] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [showMoreDropdown, setShowMoreDropdown] = useState(false);
+  const bookNowButtonRef = useRef(null);
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
@@ -67,6 +68,12 @@ const Navbar = ({ handleOrderPopup }) => {
     setShowMenu(false);
     setShowMoreDropdown(false);
     window.scrollTo(0, 0); // Scroll to top when a link is clicked
+  };
+
+  const triggerBookNow = () => {
+    if (bookNowButtonRef.current) {
+      bookNowButtonRef.current.click();
+    }
   };
 
   return (
@@ -148,6 +155,7 @@ const Navbar = ({ handleOrderPopup }) => {
             </div>
             <div className="flex items-center gap-4">
               <button
+                ref={bookNowButtonRef}
                 className="bg-gradient-to-br from-primary to-secondary hover:from-secondary hover:to-primary transition-all duration-600 text-white px-3 py-1 rounded-full"
                 onClick={handleOrderPopup}
               >

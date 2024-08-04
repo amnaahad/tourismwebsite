@@ -48,7 +48,9 @@ const OrderPopup = ({ orderPopup, setOrderPopup }) => {
       toast.error(errors.join(" "));
     } else {
       toast.success("Booking Successful");
-      setOrderPopup(false);
+      setTimeout(() => {
+        setOrderPopup(false); // Close the form after a slight delay
+      }, 1000); // Delay in milliseconds
     }
   };
 
